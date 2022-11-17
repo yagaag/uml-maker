@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ConnectionGeometryProcessor;
+import Model.Point;
 import Model.UserClass;
 
 import javax.swing.*;
@@ -20,6 +21,14 @@ public class DrawArrow extends DrawableComposite {
         super.draw(panel, connectionProcessor);
         Graphics g = panel.getGraphics();
         g.setColor(Color.white);
-
+        ArrayList<Point> points = connectionProcessor.findControlPoints("to");
+        for (int i=0; i<2; i++) {
+            g.drawLine(
+                    connectionProcessor.getToPoint().xCoord(),
+                    connectionProcessor.getToPoint().yCoord(),
+                    points.get(i).xCoord(),
+                    points.get(i).yCoord()
+            );
+        }
     }
 }

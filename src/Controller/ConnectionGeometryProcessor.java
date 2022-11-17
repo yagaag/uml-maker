@@ -1,22 +1,30 @@
 package Controller;
 
+import Model.Point;
 import Model.UserClass;
 import Model.ViewConstants;
 
+import java.util.ArrayList;
+
 public class ConnectionGeometryProcessor {
     
-    UserClass from;
-    UserClass to;
+    UserClass fromClass;
+    UserClass toClass;
+    int fromAngle;
+    int toAngle;
+
+    Point fromPoint;
+    Point toPoint;
     int fromX;
     int fromY;
     int toX;
     int toY;
     
     public ConnectionGeometryProcessor(UserClass from, UserClass to) {
-        this.from = from;
-        this.to = to;
-        int fromAngle = getAngle(to, from);
-        int toAngle = getAngle(from, to);
+        this.fromClass = from;
+        this.toClass = to;
+        fromAngle = getAngle(to, from);
+        toAngle = getAngle(from, to);
         System.out.println(fromAngle);
         System.out.println(toAngle);
         findPositions(fromAngle, toAngle);
@@ -33,55 +41,59 @@ public class ConnectionGeometryProcessor {
     private void findPositions(int fromAngle, int toAngle) {
 
         if (fromAngle <= 45 || fromAngle > 315) {
-            fromX = from.xCoord() + (ViewConstants.userClassWidth/2);
-            fromY = from.yCoord();
+            fromPoint = new Point(fromClass.xCoord() + (ViewConstants.userClassWidth/2), fromClass.yCoord());
         } else if (fromAngle <= 135) {
-            fromX = from.xCoord();
-            fromY = from.yCoord() + (ViewConstants.userClassHeight/2);
+            fromPoint = new Point(fromClass.xCoord(), fromClass.yCoord() + (ViewConstants.userClassHeight/2));
         } else if (fromAngle <= 225) {
-            fromX = from.xCoord() - (ViewConstants.userClassWidth/2);
-            fromY = from.yCoord();
+            fromPoint = new Point(fromClass.xCoord() - (ViewConstants.userClassWidth/2), fromClass.yCoord());
         } else {
-            fromX = from.xCoord();
-            fromY = from.yCoord() - (ViewConstants.userClassHeight/2);
+            fromPoint = new Point(fromClass.xCoord(), fromClass.yCoord() - (ViewConstants.userClassHeight/2));
         }
 
         if (toAngle <= 45 || toAngle > 315) {
-            toX = to.xCoord() + (ViewConstants.userClassWidth/2);
-            toY = to.yCoord();
+            toPoint = new Point(toClass.xCoord() + (ViewConstants.userClassWidth/2), toClass.yCoord());
         } else if (toAngle <= 135) {
-            toX = to.xCoord();
-            toY = to.yCoord() + (ViewConstants.userClassHeight/2);
+            toPoint = new Point(toClass.xCoord(), toClass.yCoord() + (ViewConstants.userClassHeight/2));
         } else if (toAngle <= 225) {
-            toX = to.xCoord() - (ViewConstants.userClassWidth/2);
-            toY = to.yCoord();
+            toPoint = new Point(toClass.xCoord() - (ViewConstants.userClassWidth/2), toClass.yCoord());
         } else {
-            toX = to.xCoord();
-            toY = to.yCoord() - (ViewConstants.userClassHeight/2);
+            toPoint = new Point(toClass.xCoord(), toClass.yCoord() - (ViewConstants.userClassHeight/2));
         }
     }
 
-    public void findControlPoints(String side) {
-//        if (side == "from") {
-//
-//        } else {
-//
-//        }
+    private Point generatePoint(double cosTheta, double sinTheta, Point pt, int i, int aMajor, int aMinor) {
+        double radConv = Math.PI/180;
+        double iCos = Math.cos(i*radConv);
+        double iSin = Math.sin(i*radConv);
+        int x1 = (int)(aMajor * iCos * cosTheta);
+        int x2 = (int)(aMinor * iSin * sinTheta);
+        int y1 = (int)(aMajor * iCos * sinTheta);
+        int y2 = (int)(aMinor * iSin * cosTheta);
+        return new Point(pt.xCoord()+x1-x2, pt.yCoord()+y1+y2);
     }
 
-    public int getFromX() {
-        return fromX;
+    public ArrayList<Point> findControlPoints(String side) {
+        ArrayList<Point> points = new ArrayList<>();
+        double radConv = Math.PI/180;
+        if (side == "from") {
+            double cosTheta = Math.cos(fromAngle*radConv);
+            double sinTheta = Math.sin(fromAngle*radConv);
+            points.add(generatePoint(cosTheta, sinTheta, fromPoint, 45, 15, 15));
+            points.add(generatePoint(cosTheta, sinTheta, fromPoint, 315, 15, 15));
+        } else {
+            double cosTheta = Math.cos(toAngle*radConv);
+            double sinTheta = Math.sin(toAngle*radConv);
+            points.add(generatePoint(cosTheta, sinTheta, toPoint, 45, 15, 15));
+            points.add(generatePoint(cosTheta, sinTheta, toPoint, 315, 15, 15));
+        }
+        return points;
     }
 
-    public int getFromY() {
-        return fromY;
+    public Point getFromPoint() {
+        return fromPoint;
     }
 
-    public int getToX() {
-        return toX;
-    }
-
-    public int getToY() {
-        return toY;
+    public Point getToPoint() {
+        return toPoint;
     }
 }

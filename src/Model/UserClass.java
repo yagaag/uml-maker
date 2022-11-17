@@ -16,6 +16,10 @@ public class UserClass {
 
     }
 
+    public Point getCenter() {
+        return center;
+    }
+
     public int xCoord() {
         return center.xCoord();
     }

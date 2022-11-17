@@ -28,10 +28,10 @@ public class DrawLine implements Drawable {
         Graphics g = panel.getGraphics();
         g.setColor(Color.white);
         g.drawLine(
-                connectionProcessor.getFromX(),
-                connectionProcessor.getFromY(),
-                connectionProcessor.getToX(),
-                connectionProcessor.getToY()
+                connectionProcessor.getFromPoint().xCoord(),
+                connectionProcessor.getFromPoint().yCoord(),
+                connectionProcessor.getToPoint().xCoord(),
+                connectionProcessor.getToPoint().yCoord()
         );
     }
 }
