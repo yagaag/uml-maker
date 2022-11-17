@@ -15,6 +15,8 @@ public class GlobalStatus extends Observable {
     }
     public void setConnectionType(ConnectionType type) {
         connectionType = type;
+        this.setChanged();
+        this.notifyObservers();
     }
     public ConnectionType getConnectionType() {
         return connectionType;

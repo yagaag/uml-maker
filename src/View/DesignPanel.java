@@ -58,11 +58,13 @@ public class DesignPanel extends JPanel implements MouseListener {
             case INHERITANCE -> {
                 drawableComposite = new DrawTriangle();
                 drawableComposite.addDrawable(new DrawLine());
+                drawableComposite.draw(this, connectionProcessor);
             }
             case DEPENDENCY -> {
                 drawableComposite = new DrawDiamond();
                 drawableComposite.addDrawable(new DrawArrow());
                 drawableComposite.addDrawable(new DrawLine());
+                drawableComposite.draw(this, connectionProcessor);
             }
         }
     }

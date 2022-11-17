@@ -11,7 +11,7 @@ public class ClickEventProcessor {
     public PanelMode categoriseClickEvent(int x, int y) {
         DrawnClasses drawnClasses = DrawnClasses.getInstance();
         PanelMode mode = PanelMode.NEW;
-        for(int i = 0; i<drawnClasses.getLength(); i++) {
+        for(int i=0; i<drawnClasses.getLength(); i++) {
             UserClass userClass = drawnClasses.getClassByID(i);
             if (checkWithinBoundary(userClass.xCoord(), userClass.yCoord(), x, y)) {
                 lastClickPanelID = i;

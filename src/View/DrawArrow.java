@@ -22,7 +22,7 @@ public class DrawArrow extends DrawableComposite {
         Graphics g = panel.getGraphics();
         g.setColor(Color.white);
         ArrayList<Point> points = connectionProcessor.findControlPoints("to");
-        for (int i=0; i<2; i++) {
+        for (int i=0; i<points.size(); i++) {
             g.drawLine(
                     connectionProcessor.getToPoint().xCoord(),
                     connectionProcessor.getToPoint().yCoord(),

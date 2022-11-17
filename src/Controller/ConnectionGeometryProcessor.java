@@ -79,6 +79,7 @@ public class ConnectionGeometryProcessor {
             double cosTheta = Math.cos(fromAngle*radConv);
             double sinTheta = Math.sin(fromAngle*radConv);
             points.add(generatePoint(cosTheta, sinTheta, fromPoint, 45, 15, 15));
+            points.add(generatePoint(cosTheta, sinTheta, fromPoint, 0, 22, 22));
             points.add(generatePoint(cosTheta, sinTheta, fromPoint, 315, 15, 15));
         } else {
             double cosTheta = Math.cos(toAngle*radConv);

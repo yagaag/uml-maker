@@ -1,7 +1,9 @@
 package View;
 
 import Controller.ConnectionGeometryProcessor;
+import Model.Point;
 import Model.UserClass;
+import Model.ViewConstants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +21,18 @@ public class DrawTriangle extends DrawableComposite {
     public void draw(JPanel panel, ConnectionGeometryProcessor connectionProcessor) {
         super.draw(panel, connectionProcessor);
         Graphics g = panel.getGraphics();
-        g.setColor(Color.red);
-
+        g.setColor(ViewConstants.accentColor);
+        ArrayList<Point> points = connectionProcessor.findControlPoints("to");
+        int[] xPoints = new int[3];
+        int[] yPoints = new int[3];
+        xPoints[0] = points.get(0).xCoord();
+        xPoints[1] = points.get(1).xCoord();
+        xPoints[2] = connectionProcessor.getToPoint().xCoord();
+        yPoints[0] = points.get(0).yCoord();
+        yPoints[1] = points.get(1).yCoord();
+        yPoints[2] = connectionProcessor.getToPoint().yCoord();
+        g.fillPolygon(xPoints,yPoints,3);
+        g.setColor(Color.white);
+        g.drawPolygon(xPoints, yPoints, 3);
     }
 }
