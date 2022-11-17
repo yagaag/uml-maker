@@ -2,6 +2,7 @@ package View;
 
 import Model.ConnectionType;
 import Model.DrawnClasses;
+import Model.GlobalStatus;
 import Model.ViewConstants;
 
 import javax.swing.*;
@@ -18,9 +19,9 @@ public class App extends JFrame implements ActionListener {
     JMenuItem association = new JMenuItem("Association");
     JMenuItem inheritance = new JMenuItem("Inheritance");
     JMenuItem dependency = new JMenuItem("Dependency");
-    JPanel codePanel;
+    CodePanel codePanel;
     DesignPanel designPanel;
-    JPanel statusBar;
+    StatusBar statusBar;
 
     public App() {
 
@@ -43,20 +44,19 @@ public class App extends JFrame implements ActionListener {
         menuBar.add(file);
         menuBar.add(help);
         menuBar.add(connectionType);
-        menuBar.setBounds(0,0,1000,35);
+        menuBar.setBounds(-2,-2,ViewConstants.panelWidth+4,35);
         menuBar.setBorder(BorderFactory.createLineBorder(ViewConstants.accentColor, 2));
         menuBar.setBackground(Color.white);
-        codePanel = new JPanel();
+        codePanel = new CodePanel(10, 45, 300, 690);
         codePanel.setBounds(10,45,300,690);
         codePanel.setBorder(BorderFactory.createLineBorder(ViewConstants.accentColor, 2));
         codePanel.setBackground(Color.white);
         designPanel = new DesignPanel(320, 45, 670, 690);
-        statusBar = new JPanel();
-        statusBar.setBounds(0,745,1000,35);
-        statusBar.setBorder(BorderFactory.createLineBorder(ViewConstants.accentColor, 2));
-        statusBar.setBackground(Color.white);
+        statusBar = new StatusBar(-2, 745, ViewConstants.panelWidth+4, 37);
+        GlobalStatus.getInstance().addObserver(statusBar);
+        DrawnClasses.getInstance().addObserver(codePanel);
 
-        this.setPreferredSize(new Dimension(1000,808));
+        this.setPreferredSize(new Dimension(ViewConstants.panelWidth,ViewConstants.panelHeight));
         this.setLayout(null);
         this.add(menuBar);
         this.add(codePanel);
@@ -71,13 +71,13 @@ public class App extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == association) {
-            designPanel.setConnectionType(ConnectionType.ASSOCIATION);
+            GlobalStatus.getInstance().setConnectionType(ConnectionType.ASSOCIATION);
         }
         else if(e.getSource() == inheritance) {
-            designPanel.setConnectionType(ConnectionType.INHERITANCE);
+            GlobalStatus.getInstance().setConnectionType(ConnectionType.INHERITANCE);
         }
         else if(e.getSource() == dependency) {
-            designPanel.setConnectionType(ConnectionType.DEPENDENCY);
+            GlobalStatus.getInstance().setConnectionType(ConnectionType.DEPENDENCY);
         }
         else if(e.getSource() == clear) {
             designPanel.clearAll();

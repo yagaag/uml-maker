@@ -13,7 +13,7 @@ public class ClickEventProcessor {
         PanelMode mode = PanelMode.NEW;
         for(int i = 0; i<drawnClasses.getLength(); i++) {
             UserClass userClass = drawnClasses.getClassByID(i);
-            if (checkWithinBoundary(userClass.getX(), userClass.getY(), x, y)) {
+            if (checkWithinBoundary(userClass.xCoord(), userClass.yCoord(), x, y)) {
                 lastClickPanelID = i;
                 System.out.println("Claiming intersection");
                 System.out.println(i);

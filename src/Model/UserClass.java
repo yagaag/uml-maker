@@ -4,26 +4,24 @@ import java.util.ArrayList;
 
 public class UserClass {
 
-    int x;
-    int y;
+    Point center;
     String title;
     ArrayList<Connection> connections = new ArrayList<>();
 
     public UserClass(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
+        this.center = new Point(x,y);
     }
 
     public void addConnection() {
 
+    }
+
+    public int xCoord() {
+        return center.xCoord();
+    }
+
+    public int yCoord() {
+        return center.yCoord();
     }
 
 }

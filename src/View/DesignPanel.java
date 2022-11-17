@@ -1,24 +1,19 @@
 package View;
 
 import Controller.ClickEventProcessor;
-import Model.ConnectionType;
-import Model.PanelMode;
-import Model.ViewConstants;
+import Controller.ConnectionGeometryProcessor;
+import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.Observable;
 
 public class DesignPanel extends JPanel implements MouseListener {
 
     PanelMode mode = PanelMode.NEW;
-    ConnectionType connectionType = ConnectionType.ASSOCIATION;
     ClickEventProcessor processor = new ClickEventProcessor();
+    DrawableComposite drawableComposite;
     int lastClickPanelID;
 
     public DesignPanel(int x, int y, int width, int height) {
@@ -45,24 +40,45 @@ public class DesignPanel extends JPanel implements MouseListener {
         );
     }
 
-    public void setConnectionType(ConnectionType type) {
-        connectionType = type;
-    }
-
     public void clearAll() {
         this.setBorder(BorderFactory.createLineBorder(ViewConstants.accentColor, 2));
         mode = PanelMode.NEW;
+    }
+
+    public void makeConnection(int from, int to) {
+        UserClass a = DrawnClasses.getInstance().getClassByID(from);
+        UserClass b = DrawnClasses.getInstance().getClassByID(to);
+        ConnectionGeometryProcessor connectionProcessor = new ConnectionGeometryProcessor(a,b);
+        switch (GlobalStatus.getInstance().getConnectionType()) {
+            case ASSOCIATION -> {
+                drawableComposite = new DrawArrow();
+                drawableComposite.addDrawable(new DrawLine());
+                drawableComposite.draw(this, connectionProcessor);
+            }
+            case INHERITANCE -> {
+                drawableComposite = new DrawTriangle();
+                drawableComposite.addDrawable(new DrawLine());
+            }
+            case DEPENDENCY -> {
+                drawableComposite = new DrawDiamond();
+                drawableComposite.addDrawable(new DrawArrow());
+                drawableComposite.addDrawable(new DrawLine());
+            }
+        }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         PanelMode clickMode = processor.categoriseClickEvent(e.getX(), e.getY());
         if (clickMode == PanelMode.CONNECT) {
+            GlobalStatus.getInstance().setDrawStatus("Selected i");
             System.out.println("Connect mode");
             if (mode == PanelMode.CONNECT) {
+                GlobalStatus.getInstance().setDrawStatus("Connecting i with j");
                 System.out.println("Already in connect mode");
                 int connectPanelID = processor.getLastClickPanelID();
-//                makeConnection(lastClickPanelID, connectPanelID);
+                makeConnection(lastClickPanelID, connectPanelID);
+                mode = PanelMode.NEW;
             }
             else {
                 System.out.println("Entering connect mode");
@@ -71,6 +87,7 @@ public class DesignPanel extends JPanel implements MouseListener {
             }
         }
         else {
+            GlobalStatus.getInstance().setDrawStatus("No class selected");
             mode = PanelMode.NEW;
             processor.newUserClass(e.getX(), e.getY());
             this.drawRectangle(e.getX(),e.getY());
