@@ -1,6 +1,6 @@
 package View;
 
-import Model.DrawnClasses;
+import Controller.ParseCode;
 import Model.ViewConstants;
 
 import javax.swing.*;
@@ -10,21 +10,23 @@ import java.util.Observer;
 
 public class CodePanel extends JPanel implements Observer {
 
-    JLabel code;
+    JTextArea code;
+    ParseCode parseCode;
 
     public CodePanel(int x, int y, int width, int height) {
+        parseCode = new ParseCode();
         this.setBounds(x,y,width,height);
         this.setBorder(BorderFactory.createLineBorder(ViewConstants.accentColor, 2));
         this.setBackground(Color.white);
-        code = new JLabel(DrawnClasses.getInstance().getText());
-        code.setBounds(10,5,width-20,30);
+        code = new JTextArea("");
+        code.setEditable(false);
+        code.setBounds(10,5,width-20,height-20);
         this.setLayout(null);
         this.add(code);
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("waa");
-        code.setText(DrawnClasses.getInstance().getText());
+        code.setText(parseCode.parse());
     }
 }

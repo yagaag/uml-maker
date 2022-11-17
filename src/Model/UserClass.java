@@ -10,14 +10,19 @@ public class UserClass {
 
     public UserClass(int x, int y) {
         this.center = new Point(x,y);
+        this.title = "Yagaa";
     }
 
-    public void addConnection() {
-
+    public void addConnection(Connection c) {
+        connections.add(c);
     }
 
     public Point getCenter() {
         return center;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public int xCoord() {
@@ -26,6 +31,10 @@ public class UserClass {
 
     public int yCoord() {
         return center.yCoord();
+    }
+
+    public ArrayList<Connection> getConnections() {
+        return connections;
     }
 
 }

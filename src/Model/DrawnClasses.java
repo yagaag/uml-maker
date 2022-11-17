@@ -21,10 +21,6 @@ public class DrawnClasses extends Observable {
         return classes.size();
     }
 
-    public String getText() {
-        return "Hellow";
-    }
-
     public UserClass getClassByID(int id) {
         return classes.get(id);
     }
@@ -35,8 +31,11 @@ public class DrawnClasses extends Observable {
         this.notifyObservers();
     }
 
-    public void addConnection(int from, int to) {
-
+    public void addConnection(int from, int to, ConnectionType type) {
+        Connection c = new Connection(classes.get(to), type);
+        classes.get(from).addConnection(c);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void reset() {

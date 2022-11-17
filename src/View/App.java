@@ -77,7 +77,7 @@ public class App extends JFrame implements ActionListener {
             GlobalStatus.getInstance().setConnectionType(ConnectionType.INHERITANCE);
         }
         else if(e.getSource() == dependency) {
-            GlobalStatus.getInstance().setConnectionType(ConnectionType.DEPENDENCY);
+            GlobalStatus.getInstance().setConnectionType(ConnectionType.AGGREGATION);
         }
         else if(e.getSource() == clear) {
             designPanel.clearAll();

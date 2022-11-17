@@ -51,16 +51,19 @@ public class DesignPanel extends JPanel implements MouseListener {
         ConnectionGeometryProcessor connectionProcessor = new ConnectionGeometryProcessor(a,b);
         switch (GlobalStatus.getInstance().getConnectionType()) {
             case ASSOCIATION -> {
+                DrawnClasses.getInstance().addConnection(from, to, ConnectionType.ASSOCIATION);
                 drawableComposite = new DrawArrow();
                 drawableComposite.addDrawable(new DrawLine());
                 drawableComposite.draw(this, connectionProcessor);
             }
             case INHERITANCE -> {
+                DrawnClasses.getInstance().addConnection(from, to, ConnectionType.INHERITANCE);
                 drawableComposite = new DrawTriangle();
                 drawableComposite.addDrawable(new DrawLine());
                 drawableComposite.draw(this, connectionProcessor);
             }
-            case DEPENDENCY -> {
+            case AGGREGATION -> {
+                DrawnClasses.getInstance().addConnection(from, to, ConnectionType.AGGREGATION);
                 drawableComposite = new DrawDiamond();
                 drawableComposite.addDrawable(new DrawArrow());
                 drawableComposite.addDrawable(new DrawLine());
