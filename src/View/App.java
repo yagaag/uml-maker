@@ -16,9 +16,9 @@ public class App extends JFrame implements ActionListener {
     JMenuItem save = new JMenuItem("Save");
     JMenuItem load = new JMenuItem("Load");
     JMenuItem clear = new JMenuItem("Clear");
-    JMenuItem association = new JMenuItem("Association");
-    JMenuItem inheritance = new JMenuItem("Inheritance");
-    JMenuItem dependency = new JMenuItem("Dependency");
+    JMenuItem association = new JMenuItem(ConnectionType.ASSOCIATION.name);
+    JMenuItem inheritance = new JMenuItem(ConnectionType.INHERITANCE.name);
+    JMenuItem aggregation = new JMenuItem(ConnectionType.AGGREGATION.name);
     CodePanel codePanel;
     DesignPanel designPanel;
     StatusBar statusBar;
@@ -34,13 +34,13 @@ public class App extends JFrame implements ActionListener {
         clear.addActionListener(this);
         association.addActionListener(this);
         inheritance.addActionListener(this);
-        dependency.addActionListener(this);
+        aggregation.addActionListener(this);
         file.add(save);
         file.add(load);
         file.add(clear);
         connectionType.add(association);
         connectionType.add(inheritance);
-        connectionType.add(dependency);
+        connectionType.add(aggregation);
         menuBar.add(file);
         menuBar.add(help);
         menuBar.add(connectionType);
@@ -76,7 +76,7 @@ public class App extends JFrame implements ActionListener {
         else if(e.getSource() == inheritance) {
             GlobalStatus.getInstance().setConnectionType(ConnectionType.INHERITANCE);
         }
-        else if(e.getSource() == dependency) {
+        else if(e.getSource() == aggregation) {
             GlobalStatus.getInstance().setConnectionType(ConnectionType.AGGREGATION);
         }
         else if(e.getSource() == clear) {
