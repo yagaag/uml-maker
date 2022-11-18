@@ -25,8 +25,8 @@ public class DrawnClasses extends Observable {
         return classes.get(id);
     }
 
-    public void addUserClass(int x, int y) {
-        classes.add(new UserClass(x,y));
+    public void addUserClass(int x, int y, String name) {
+        classes.add(new UserClass(x, y, name));
         this.setChanged();
         this.notifyObservers();
     }

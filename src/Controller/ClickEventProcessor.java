@@ -5,9 +5,12 @@ import Model.PanelMode;
 import Model.UserClass;
 import Model.ViewConstants;
 
+import javax.swing.*;
+
 public class ClickEventProcessor {
 
     int lastClickPanelID = 0;
+
     public PanelMode categoriseClickEvent(int x, int y) {
         DrawnClasses drawnClasses = DrawnClasses.getInstance();
         PanelMode mode = PanelMode.NEW;
@@ -37,8 +40,15 @@ public class ClickEventProcessor {
         return lastClickPanelID;
     }
 
-    public void newUserClass(int x, int y) {
+    public String newUserClass(int x, int y) {
+        String name = JOptionPane.showInputDialog("Enter the name of the class:");
+        System.out.println(name);
         DrawnClasses drawnClasses = DrawnClasses.getInstance();
-        drawnClasses.addUserClass(x,y);
+        if (name == null || name.length() == 0) {
+            name = "Class" + (drawnClasses.getLength()+1);
+        }
+
+        drawnClasses.addUserClass(x, y, name);
+        return name;
     }
 }

@@ -22,8 +22,7 @@ public class DesignPanel extends JPanel implements MouseListener {
         this.addMouseListener(this);
     }
 
-    private void drawRectangle(int x, int y) {
-        System.out.println("Drawing");
+    private void drawRectangle(int x, int y, String className) {
         Graphics g = this.getGraphics();
         g.setColor(ViewConstants.classColor);
         g.fillRect(
@@ -38,6 +37,8 @@ public class DesignPanel extends JPanel implements MouseListener {
                 ViewConstants.userClassWidth,
                 ViewConstants.userClassHeight
         );
+        g.setColor(ViewConstants.textColor);
+        g.drawString(className, x-(int)(className.length()*3.9), y+5);
     }
 
     public void clearAll() {
@@ -48,6 +49,7 @@ public class DesignPanel extends JPanel implements MouseListener {
     public void makeConnection(int from, int to) {
         UserClass a = DrawnClasses.getInstance().getClassByID(from);
         UserClass b = DrawnClasses.getInstance().getClassByID(to);
+        GlobalStatus.getInstance().setDrawStatus("Connecting " + a.getTitle() + " with " + b.getTitle());
         ConnectionGeometryProcessor connectionProcessor = new ConnectionGeometryProcessor(a,b);
         switch (GlobalStatus.getInstance().getConnectionType()) {
             case ASSOCIATION -> {
@@ -76,17 +78,14 @@ public class DesignPanel extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         PanelMode clickMode = processor.categoriseClickEvent(e.getX(), e.getY());
         if (clickMode == PanelMode.CONNECT) {
-            GlobalStatus.getInstance().setDrawStatus("Selected i");
-            System.out.println("Connect mode");
+            int connectPanelID = processor.getLastClickPanelID();
+            String title = DrawnClasses.getInstance().getClassByID(connectPanelID).getTitle();
+            GlobalStatus.getInstance().setDrawStatus("Selected " + title);
             if (mode == PanelMode.CONNECT) {
-                GlobalStatus.getInstance().setDrawStatus("Connecting i with j");
-                System.out.println("Already in connect mode");
-                int connectPanelID = processor.getLastClickPanelID();
                 makeConnection(lastClickPanelID, connectPanelID);
                 mode = PanelMode.NEW;
             }
             else {
-                System.out.println("Entering connect mode");
                 mode = PanelMode.CONNECT;
                 lastClickPanelID = processor.getLastClickPanelID();
             }
@@ -94,8 +93,8 @@ public class DesignPanel extends JPanel implements MouseListener {
         else {
             GlobalStatus.getInstance().setDrawStatus("No class selected");
             mode = PanelMode.NEW;
-            processor.newUserClass(e.getX(), e.getY());
-            this.drawRectangle(e.getX(),e.getY());
+            String className = processor.newUserClass(e.getX(), e.getY());
+            this.drawRectangle(e.getX(),e.getY(), className);
         }
     }
 

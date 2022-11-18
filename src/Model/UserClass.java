@@ -8,9 +8,9 @@ public class UserClass {
     String title;
     ArrayList<Connection> connections = new ArrayList<>();
 
-    public UserClass(int x, int y) {
+    public UserClass(int x, int y, String name) {
         this.center = new Point(x,y);
-        this.title = "Yagaa";
+        this.title = name;
     }
 
     public void addConnection(Connection c) {
