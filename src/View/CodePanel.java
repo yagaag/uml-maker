@@ -1,6 +1,6 @@
 package View;
 
-import Controller.ParseCode;
+import Controller.ParseUML;
 import Model.ViewConstants;
 
 import javax.swing.*;
@@ -11,10 +11,10 @@ import java.util.Observer;
 public class CodePanel extends JPanel implements Observer {
 
     JTextArea code;
-    ParseCode parseCode;
+    ParseUML parseUML;
 
     public CodePanel(int x, int y, int width, int height) {
-        parseCode = new ParseCode();
+        parseUML = new ParseUML();
         this.setBounds(x,y,width,height);
         this.setBorder(BorderFactory.createLineBorder(ViewConstants.accentColor, 2));
         this.setBackground(Color.white);
@@ -27,6 +27,6 @@ public class CodePanel extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        code.setText(parseCode.parse());
+        code.setText(parseUML.parseUML());
     }
 }

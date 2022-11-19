@@ -6,18 +6,14 @@ import Model.UserClass;
 
 import java.util.ArrayList;
 
-public class ParseAggregation implements ParseUserClass {
-
-    ParseUserClass parser;
-
-    public void setNextParser(ParseUserClass parser) {
-        this.parser = parser;
-    }
+public class AggregationParser extends ChainableParser {
 
     @Override
     public String parse(UserClass userClass) {
+
+        String s = super.parse(userClass);
+
         ArrayList<Connection> connections = userClass.getConnections();
-        String s = parser.parse(userClass);
         for (int i=0; i<connections.size(); i++) {
             if (connections.get(i).getType() == ConnectionType.AGGREGATION) {
                 int idx = s.indexOf("{\n");

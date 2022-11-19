@@ -1,27 +1,26 @@
 package Controller;
 
 import Model.DrawnClasses;
-import Model.UserClass;
 
-public class ParseCode {
+public class ParseUML {
 
-    ParseAssociation headParser;
+    ChainableParser headParser;
 
-    public ParseCode() {
+    public ParseUML() {
         setupParseChain();
     }
 
     private void setupParseChain() {
-        headParser = new ParseAssociation();
-        ParseAggregation secondParser = new ParseAggregation();
-        ParseInheritance thirdParser = new ParseInheritance();
-        ParseClassName tailParser = new ParseClassName();
+        headParser = new AssociationParser();
+        AggregationParser secondParser = new AggregationParser();
+        InheritanceParser thirdParser = new InheritanceParser();
+        ClassNameParser tailParser = new ClassNameParser();
         thirdParser.setNextParser(tailParser);
         secondParser.setNextParser(thirdParser);
         headParser.setNextParser(secondParser);
     }
 
-    public String parse() {
+    public String parseUML() {
 
         String s = "";
         int numClasses = DrawnClasses.getInstance().getLength();

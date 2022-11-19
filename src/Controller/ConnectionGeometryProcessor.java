@@ -25,8 +25,6 @@ public class ConnectionGeometryProcessor {
         this.toClass = to;
         fromAngle = getAngle(to, from);
         toAngle = getAngle(from, to);
-        System.out.println(fromAngle);
-        System.out.println(toAngle);
         findPositions(fromAngle, toAngle);
     }
     

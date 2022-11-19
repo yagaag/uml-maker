@@ -79,8 +79,8 @@ public class DesignPanel extends JPanel implements MouseListener {
         PanelMode clickMode = processor.categoriseClickEvent(e.getX(), e.getY());
         if (clickMode == PanelMode.CONNECT) {
             int connectPanelID = processor.getLastClickPanelID();
-            String title = DrawnClasses.getInstance().getClassByID(connectPanelID).getTitle();
-            GlobalStatus.getInstance().setDrawStatus("Selected " + title);
+            String className = DrawnClasses.getInstance().getClassByID(connectPanelID).getTitle();
+            GlobalStatus.getInstance().setDrawStatus("Selected " + className);
             if (mode == PanelMode.CONNECT) {
                 makeConnection(lastClickPanelID, connectPanelID);
                 mode = PanelMode.NEW;
@@ -91,10 +91,11 @@ public class DesignPanel extends JPanel implements MouseListener {
             }
         }
         else {
-            GlobalStatus.getInstance().setDrawStatus("No class selected");
+            if (processor.newUserClass(e.getX(),e.getY())) {
+                this.drawRectangle(e.getX(),e.getY(), processor.getLastClassName());
+            }
             mode = PanelMode.NEW;
-            String className = processor.newUserClass(e.getX(), e.getY());
-            this.drawRectangle(e.getX(),e.getY(), className);
+            GlobalStatus.getInstance().setDrawStatus("No class selected");
         }
     }
 

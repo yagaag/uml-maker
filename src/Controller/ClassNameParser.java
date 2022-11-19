@@ -2,7 +2,7 @@ package Controller;
 
 import Model.UserClass;
 
-public class ParseClassName implements ParseUserClass {
+public class ClassNameParser implements Parser {
     @Override
     public String parse(UserClass userClass) {
         return "class " + userClass.getTitle() + " {\n}";

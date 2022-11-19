@@ -40,5 +40,7 @@ public class DrawnClasses extends Observable {
 
     public void reset() {
         classes.clear();
+        this.setChanged();
+        this.notifyObservers();
     }
 }
