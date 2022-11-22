@@ -17,6 +17,11 @@ public class DrawnClasses extends Observable {
         return instance;
     }
 
+//    public boolean loadFromFile(String fileName) {
+//        FileProcessor processor = new FileProcessor();
+//        processor.load
+//    }
+
     public int getLength() {
         return classes.size();
     }
