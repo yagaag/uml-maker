@@ -1,7 +1,8 @@
 package Controller;
 
 import Model.UserClass;
+import View.CodeViewPanel;
 
 public interface Parser {
-    String parse(UserClass userClass);
+    public void parse(UserClass userClass, CodeViewPanel panel);
 }

@@ -1,17 +1,19 @@
 package Controller;
 
 import Model.UserClass;
+import View.CodeViewPanel;
 
 public abstract class ChainableParser implements Parser {
-    Parser parser;
+    Parser nextParser;
     public void setNextParser(Parser parser) {
-        this.parser = parser;
+        this.nextParser = parser;
     }
 
-    public String parse(UserClass userClass) {
-        if (parser == null) {
-            parser = new ClassNameParser();
+    public void parse(UserClass userClass, CodeViewPanel panel) {
+        if (nextParser == null) {
+            nextParser = new AssociationParser();
         }
-        return parser.parse(userClass);
+        nextParser.parse(userClass, panel);
     }
 }
+

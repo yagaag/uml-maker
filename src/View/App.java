@@ -18,7 +18,7 @@ public class App extends JFrame implements ActionListener {
     JMenuItem clear = new JMenuItem("Clear");
     JMenuItem association = new JMenuItem(ConnectionType.ASSOCIATION.name);
     JMenuItem inheritance = new JMenuItem(ConnectionType.INHERITANCE.name);
-    JMenuItem aggregation = new JMenuItem(ConnectionType.AGGREGATION.name);
+    JMenuItem aggregation = new JMenuItem(ConnectionType.COMPOSITION.name);
     CodePanel codePanel;
     DesignPanel designPanel;
     StatusBar statusBar;
@@ -77,7 +77,7 @@ public class App extends JFrame implements ActionListener {
             GlobalStatus.getInstance().setConnectionType(ConnectionType.INHERITANCE);
         }
         else if(e.getSource() == aggregation) {
-            GlobalStatus.getInstance().setConnectionType(ConnectionType.AGGREGATION);
+            GlobalStatus.getInstance().setConnectionType(ConnectionType.COMPOSITION);
         }
         else if(e.getSource() == clear) {
             designPanel.clearAll();

@@ -3,39 +3,34 @@ package Controller;
 import Model.Connection;
 import Model.ConnectionType;
 import Model.UserClass;
+import Model.ViewConstants;
+import View.CodeViewPanel;
 
+import java.awt.*;
 import java.util.ArrayList;
 
-public class AssociationParser extends ChainableParser {
+public class AssociationParser implements Parser {
 
     @Override
-    public String parse(UserClass userClass) {
+    public void parse(UserClass userClass, CodeViewPanel panel) {
 
-        String s = super.parse(userClass);
-
+        boolean method_added = false;
         ArrayList<Connection> connections = userClass.getConnections();
         for (int i=0; i<connections.size(); i++) {
             if (connections.get(i).getType() == ConnectionType.ASSOCIATION) {
-                if (s.contains("() {\n")) {
-                    int idx = s.indexOf("() {\n");
-                    idx += 5;
-                    s = s.substring(0,idx)
-                            + "    "
-                            + connections.get(i).getToClass().getTitle()
-                            + "\n"
-                            + s.substring(idx);
-                } else {
-                    int idx = s.indexOf("}");
-//                    idx -= 1;
-                    s = s.substring(0,idx)
-                            + "  method() {\n"
-                            + "    "
-                            + connections.get(i).getToClass().getTitle()
-                            + "\n  }\n"
-                            + s.substring(idx);
+                if (method_added) {
+                    panel.appendToPanel("    " + connections.get(i).getToClass().getTitle() + "\n", ViewConstants.baseSyntaxColor);
+                }
+                else {
+                    method_added = true;
+                    panel.appendToPanel("  method() {\n", Color.red);
+                    panel.appendToPanel("    " + connections.get(i).getToClass().getTitle() + "\n", ViewConstants.baseSyntaxColor);
                 }
             }
         }
-        return s;
+        if (method_added) {
+            panel.appendToPanel("  }\n", ViewConstants.methodSyntaxColor);
+        }
+        panel.appendToPanel("}", ViewConstants.baseSyntaxColor);
     }
 }

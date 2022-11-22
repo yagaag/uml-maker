@@ -64,8 +64,8 @@ public class DesignPanel extends JPanel implements MouseListener {
                 drawableComposite.addDrawable(new DrawLine());
                 drawableComposite.draw(this, connectionProcessor);
             }
-            case AGGREGATION -> {
-                DrawnClasses.getInstance().addConnection(from, to, ConnectionType.AGGREGATION);
+            case COMPOSITION -> {
+                DrawnClasses.getInstance().addConnection(from, to, ConnectionType.COMPOSITION);
                 drawableComposite = new DrawDiamond();
                 drawableComposite.addDrawable(new DrawArrow());
                 drawableComposite.addDrawable(new DrawLine());

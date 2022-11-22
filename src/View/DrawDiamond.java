@@ -33,9 +33,9 @@ public class DrawDiamond extends DrawableComposite {
         yPoints[1] = points.get(1).yCoord();
         yPoints[2] = points.get(2).yCoord();
         yPoints[3] = connectionProcessor.getFromPoint().yCoord();
-        g.fillPolygon(xPoints,yPoints,4);
         g.setColor(Color.white);
-        g.drawPolygon(xPoints, yPoints, 4);
+        g.fillPolygon(xPoints,yPoints,4);
+//        g.drawPolygon(xPoints, yPoints, 4);
 
     }
 }
