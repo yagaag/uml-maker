@@ -13,6 +13,10 @@ public class UserClass {
         this.title = name;
     }
 
+    public void setCenter(int x, int y) {
+        this.center = new Point(x, y);
+    }
+
     public void addConnection(Connection c) {
         connections.add(c);
     }

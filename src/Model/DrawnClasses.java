@@ -36,8 +36,12 @@ public class DrawnClasses extends Observable {
         this.notifyObservers();
     }
 
+    public void changeClassPosition(int id, int x, int y) {
+        classes.get(id).setCenter(x, y);
+    }
+
     public void addConnection(int from, int to, ConnectionType type) {
-        Connection c = new Connection(classes.get(to), type);
+        Connection c = new Connection(classes.get(to), to, type);
         classes.get(from).addConnection(c);
         this.setChanged();
         this.notifyObservers();
