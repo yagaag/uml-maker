@@ -42,11 +42,9 @@ public class DesignPanel extends JPanel implements DrawingPanel {
         System.out.println("Drawn one");
     }
 
-    public void drawConnection(int from, int to, ConnectionType type) {
-        UserClass a = DrawnClasses.getInstance().getClassByID(from);
-        UserClass b = DrawnClasses.getInstance().getClassByID(to);
-        GlobalStatus.getInstance().setDrawStatus("Connecting " + a.getTitle() + " with " + b.getTitle());
-        ConnectionGeometryProcessor connectionProcessor = new ConnectionGeometryProcessor(a,b);
+    public void drawConnection(UserClass from, UserClass to, ConnectionType type) {
+
+        ConnectionGeometryProcessor connectionProcessor = new ConnectionGeometryProcessor(from, to);
         switch (type) {
             case ASSOCIATION -> {
                 drawableComposite = new DrawArrow();
@@ -65,32 +63,25 @@ public class DesignPanel extends JPanel implements DrawingPanel {
                 drawableComposite.draw(this, connectionProcessor);
             }
         }
-        System.out.println("Finish connection");
     }
 
     @Override
     public void redraw() {
+        super.paintComponent(this.getGraphics());
         DrawnClasses drawnClasses = DrawnClasses.getInstance();
         int numClasses = drawnClasses.getLength();
-        System.out.println(numClasses);
         for (int i=0; i<numClasses; i++) {
             UserClass userClass = drawnClasses.getClassByID(i);
             drawRectangle(userClass.xCoord(), userClass.yCoord(), userClass.getTitle());
             ArrayList<Connection> connections = userClass.getConnections();
-            System.out.println(connections.size());
             for (int j=0; j < connections.size(); j++) {
-                drawConnection(i, connections.get(j).getToID(), connections.get(j).getType());
-                System.out.println(j);
+                drawConnection(userClass, connections.get(j).getToClass(), connections.get(j).getType());
             }
         }
-        System.out.println("Redrawn da");
     }
 
     public void clearAll() {
-//        this.clearAll();
         repaint();
         this.setBorder(BorderFactory.createLineBorder(ViewConstants.accentColor, 2));
-        System.out.println("Finish clear");
     }
-
 }

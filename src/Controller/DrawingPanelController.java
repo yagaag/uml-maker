@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.ConnectionType;
-import Model.DrawnClasses;
-import Model.GlobalStatus;
-import Model.PanelMode;
+import Model.*;
 import View.DrawingPanel;
 
 import java.awt.event.MouseEvent;
@@ -30,17 +27,20 @@ public class DrawingPanelController implements MouseListener, MouseMotionListene
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Logged as click");
         drag = false;
         currentClickMode = processor.categoriseClickEvent(e.getX(), e.getY());
         if (currentClickMode == PanelMode.CONNECT) {
+            DrawnClasses drawnClasses = DrawnClasses.getInstance();
             currentClickPanelID = processor.getLastClickPanelID();
-            String className = DrawnClasses.getInstance().getClassByID(currentClickPanelID).getTitle();
+            String className = drawnClasses.getClassByID(currentClickPanelID).getTitle();
             GlobalStatus.getInstance().setDrawStatus("Selected " + className);
             if (lastClickMode == PanelMode.CONNECT) {
                 ConnectionType type = GlobalStatus.getInstance().getConnectionType();
-                DrawnClasses.getInstance().addConnection(lastClickPanelID, currentClickPanelID, type);
-                panel.drawConnection(lastClickPanelID, currentClickPanelID, type);
+                UserClass from = drawnClasses.getClassByID(lastClickPanelID);
+                UserClass to = drawnClasses.getClassByID(currentClickPanelID);
+                GlobalStatus.getInstance().setDrawStatus("Connected " + from.getTitle() + " with " + to.getTitle());
+                drawnClasses.addConnection(lastClickPanelID, currentClickPanelID, type);
+                panel.drawConnection(from, to, type);
                 lastClickMode = PanelMode.NEW;
             }
             else {
@@ -59,7 +59,6 @@ public class DrawingPanelController implements MouseListener, MouseMotionListene
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("Logged as press");
         currentClickMode = processor.categoriseClickEvent(e.getX(), e.getY());
         if (currentClickMode == PanelMode.CONNECT) {
             currentClickPanelID = processor.lastClickPanelID;
@@ -68,24 +67,17 @@ public class DrawingPanelController implements MouseListener, MouseMotionListene
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        System.out.println("Logged as release");
         if (drag) {
-            System.out.println("Logged as drag release");
-            System.out.println("Drag");
             if (currentClickMode == PanelMode.CONNECT) {
-                DrawnClasses.getInstance().changeClassPosition(currentClickPanelID, e.getX(), e.getY());
-//                panel.clearAll();
+                DrawnClasses drawnClasses = DrawnClasses.getInstance();
+                drawnClasses.changeClassPosition(currentClickPanelID, e.getX(), e.getY());
+                String className = drawnClasses.getClassByID(currentClickPanelID).getTitle();
+                GlobalStatus.getInstance().setDrawStatus("Moved class " + className);
                 panel.redraw();
-                System.out.println("Exiting redraw");
                 lastClickMode = PanelMode.NEW;
             }
         }
-        else {
-            System.out.println("Click");
-        }
         drag = false;
-        System.out.println(lastClickMode);
-        System.out.println(currentClickMode);
     }
 
     @Override
@@ -100,7 +92,6 @@ public class DrawingPanelController implements MouseListener, MouseMotionListene
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        System.out.println("Logged as drag");
         drag = true;
     }
 
