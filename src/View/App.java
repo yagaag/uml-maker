@@ -1,9 +1,6 @@
 package View;
 
-import Model.ConnectionType;
-import Model.DrawnClasses;
-import Model.GlobalStatus;
-import Model.ViewConstants;
+import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +16,10 @@ public class App extends JFrame implements ActionListener {
     JMenuItem association = new JMenuItem(ConnectionType.ASSOCIATION.name);
     JMenuItem inheritance = new JMenuItem(ConnectionType.INHERITANCE.name);
     JMenuItem aggregation = new JMenuItem(ConnectionType.COMPOSITION.name);
+    JMenuItem member_1 = new JMenuItem(TeamList.YAAGA.name);
+    JMenuItem member_2 = new JMenuItem(TeamList.CHINMAY.name);
+    JMenuItem member_3 = new JMenuItem(TeamList.SNIGDHA.name);
+    JMenuItem member_4 = new JMenuItem(TeamList.MOHAN.name);
     CodePanel codePanel;
     DesignPanel designPanel;
     StatusBar statusBar;
@@ -35,9 +36,17 @@ public class App extends JFrame implements ActionListener {
         association.addActionListener(this);
         inheritance.addActionListener(this);
         aggregation.addActionListener(this);
+        member_1.addActionListener(this);
+        member_2.addActionListener(this);
+        member_3.addActionListener(this);
+        member_4.addActionListener(this);
         file.add(save);
         file.add(load);
         file.add(clear);
+        help.add(member_1);
+        help.add(member_2);
+        help.add(member_3);
+        help.add(member_4);
         connectionType.add(association);
         connectionType.add(inheritance);
         connectionType.add(aggregation);
