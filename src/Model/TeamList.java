@@ -1,7 +1,7 @@
 package Model;
 
 public enum TeamList {
-    YAAGA("Yagaagowtham Palanikumar"),CHINMAY("Chinmay Sai Krishna Atluri"),
+    YAGAA("Yagaagowtham Palanikumar"),CHINMAY("Chinmay Sai Krishna Atluri"),
     SNIGDHA("Snigdha Reddy Mudireddy"),MOHAN("Venkata Sai Mohan Kumar Pallapothu");
 
     public String name;
@@ -9,3 +9,4 @@ public enum TeamList {
         this.name = s;
     }
 }
+

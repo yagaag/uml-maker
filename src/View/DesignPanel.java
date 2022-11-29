@@ -39,7 +39,6 @@ public class DesignPanel extends JPanel implements DrawingPanel {
         );
         g.setColor(ViewConstants.textColor);
         g.drawString(content, x-(int)(content.length()*3.9), y+5);
-        System.out.println("Drawn one");
     }
 
     public void drawConnection(UserClass from, UserClass to, ConnectionType type) {
@@ -69,13 +68,10 @@ public class DesignPanel extends JPanel implements DrawingPanel {
     public void redraw() {
         super.paintComponent(this.getGraphics());
         DrawnClasses drawnClasses = DrawnClasses.getInstance();
-        int numClasses = drawnClasses.getLength();
-        for (int i=0; i<numClasses; i++) {
-            UserClass userClass = drawnClasses.getClassByID(i);
+        for (UserClass userClass: drawnClasses.getClasses()) {
             drawRectangle(userClass.xCoord(), userClass.yCoord(), userClass.getTitle());
-            ArrayList<Connection> connections = userClass.getConnections();
-            for (int j=0; j < connections.size(); j++) {
-                drawConnection(userClass, connections.get(j).getToClass(), connections.get(j).getType());
+            for (Connection connection: userClass.getConnections()) {
+                drawConnection(userClass, connection.getToClass(), connection.getType());
             }
         }
     }

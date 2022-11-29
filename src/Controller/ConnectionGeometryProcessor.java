@@ -30,7 +30,7 @@ public class ConnectionGeometryProcessor {
     
     /// Calculates the angle between two coordinates
     private int getAngle(UserClass a, UserClass b) {
-        int pivotX = a.xCoord()+10;
+        int pivotX = a.xCoord() + 10;
         int pivotY = a.yCoord();
         double angle = ((Math.atan2(b.yCoord()-pivotY, b.xCoord()-pivotX) - (Math.atan2(a.yCoord()-pivotY, a.xCoord()-pivotX))) * 180.0) / Math.PI;
         return (int)(angle < 0.0 ? angle+360.0 : angle);

@@ -1,5 +1,7 @@
 package View;
 
+import Controller.SaveEventProcessor;
+import Model.FileManager;
 import Model.*;
 
 import javax.swing.*;
@@ -16,7 +18,7 @@ public class App extends JFrame implements ActionListener {
     JMenuItem association = new JMenuItem(ConnectionType.ASSOCIATION.name);
     JMenuItem inheritance = new JMenuItem(ConnectionType.INHERITANCE.name);
     JMenuItem aggregation = new JMenuItem(ConnectionType.COMPOSITION.name);
-    JMenuItem member_1 = new JMenuItem(TeamList.YAAGA.name);
+    JMenuItem member_1 = new JMenuItem(TeamList.YAGAA.name);
     JMenuItem member_2 = new JMenuItem(TeamList.CHINMAY.name);
     JMenuItem member_3 = new JMenuItem(TeamList.SNIGDHA.name);
     JMenuItem member_4 = new JMenuItem(TeamList.MOHAN.name);
@@ -79,18 +81,26 @@ public class App extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == association) {
+        if (e.getSource() == association) {
             GlobalStatus.getInstance().setConnectionType(ConnectionType.ASSOCIATION);
         }
-        else if(e.getSource() == inheritance) {
+        else if (e.getSource() == inheritance) {
             GlobalStatus.getInstance().setConnectionType(ConnectionType.INHERITANCE);
         }
-        else if(e.getSource() == aggregation) {
+        else if (e.getSource() == aggregation) {
             GlobalStatus.getInstance().setConnectionType(ConnectionType.COMPOSITION);
         }
-        else if(e.getSource() == clear) {
+        else if (e.getSource() == clear) {
             designPanel.clearAll();
             DrawnClasses.getInstance().reset();
+        }
+        else if (e.getSource() == save) {
+            SaveEventProcessor sp = new SaveEventProcessor();
+            sp.save();
+        }
+        else {
+            SaveEventProcessor sp = new SaveEventProcessor();
+            sp.load();
         }
     }
 }

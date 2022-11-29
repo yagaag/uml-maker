@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.DrawnClasses;
+import Model.UserClass;
 import View.CodeViewPanel;
 
 import java.awt.*;
@@ -22,10 +23,8 @@ public class CodeProcessor {
     }
 
     public void parseUML(CodeViewPanel panel) {
-
-        int numClasses = DrawnClasses.getInstance().getLength();
-        for (int i=0; i<numClasses; i++) {
-            headParser.parse((DrawnClasses.getInstance().getClassByID(i)), panel);
+        for (UserClass userClass: DrawnClasses.getInstance().getClasses()) {
+            headParser.parse(userClass, panel);
             panel.appendToPanel("\n\n", Color.black);
         }
     }

@@ -30,6 +30,10 @@ public class DrawnClasses extends Observable {
         return classes.get(id);
     }
 
+    public ArrayList<UserClass> getClasses() {
+        return classes;
+    }
+
     public void addUserClass(int x, int y, String name) {
         classes.add(new UserClass(x, y, name));
         this.setChanged();

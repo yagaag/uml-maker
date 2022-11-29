@@ -21,10 +21,6 @@ public class UserClass {
         connections.add(c);
     }
 
-    public Point getCenter() {
-        return center;
-    }
-
     public String getTitle() {
         return title;
     }
