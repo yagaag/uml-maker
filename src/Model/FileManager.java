@@ -28,7 +28,7 @@ public abstract class FileManager {
             for (int i=0; i<drawnClasses.getLength(); i++) {
                 UserClass userClass = drawnClasses.getClassByID(i);
                 for (Connection connection: userClass.getConnections()) {
-                    myWriter.write("c " + connection.getType().name + " " + i + " " + connection.getToID() + '\n');
+                    myWriter.write("c " + connection.getType().name.charAt(0) + " " + i + " " + connection.getToID() + '\n');
                 }
             }
             myWriter.close();
@@ -49,9 +49,10 @@ public abstract class FileManager {
                 if (a[0].charAt(0) == 'n') {
                     drawnClasses.addUserClass(Integer.parseInt(a[2]), Integer.parseInt(a[3]), a[1]);
                 } else if (a[0].charAt(0) == 'c') {
-                    if (a[1] == "Association") {
+                    System.out.println(a[1]);
+                    if (a[1].charAt(0) == 'A') {
                         drawnClasses.addConnection(Integer.parseInt(a[2]), Integer.parseInt(a[3]), ConnectionType.ASSOCIATION);
-                    } else if (a[1] == "Inheritance") {
+                    } else if (a[1].charAt(0) == 'I') {
                         drawnClasses.addConnection(Integer.parseInt(a[2]), Integer.parseInt(a[3]), ConnectionType.INHERITANCE);
                     } else {
                         drawnClasses.addConnection(Integer.parseInt(a[2]), Integer.parseInt(a[3]), ConnectionType.COMPOSITION);

@@ -8,6 +8,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Primary JFrame with all panels
+ *
+ * @author yagaa
+ * @version 1.0.0
+ */
 public class App extends JFrame implements ActionListener {
 
     JMenuBar menuBar;
@@ -26,6 +32,9 @@ public class App extends JFrame implements ActionListener {
     StatusBar statusBar;
     SaveEventProcessor saveProcessor = new SaveEventProcessor();
 
+    /**
+     * Sets up UI components and displays the JFrame
+     */
     public App() {
 
         menuBar = new JMenuBar();
@@ -79,6 +88,11 @@ public class App extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
+    /**
+     * Sets actions for different menu items
+     *
+     * @param e ActionEvent passed by key press
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == association) {

@@ -3,7 +3,12 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A panel that can display code
+ *
+ * @author yagaa
+ * @version 1.0.0
+ */
 public interface CodeViewPanel {
-    JTextPane code = null;
-    public void appendToPanel(String msg, Color c);
+    void appendToPanel(String msg, Color c);
 }

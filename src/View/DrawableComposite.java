@@ -1,7 +1,6 @@
 package View;
 
 import Controller.ConnectionGeometryProcessor;
-import Model.UserClass;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -13,14 +12,14 @@ import java.util.ArrayList;
  * @version 1.0
  * @see Drawable
  */
-public class DrawableComposite implements Drawable {
+public abstract class DrawableComposite implements Drawable {
 
     private ArrayList<Drawable> drawableList = new ArrayList<>();
 
     /**
      * Add Drawables to the DrawableComposite
      *
-     * @param drawable
+     * @param drawable The Drawable to be added
      */
     public void addDrawable(Drawable drawable) {
         drawableList.add(drawable);
@@ -29,7 +28,7 @@ public class DrawableComposite implements Drawable {
     /**
      * Remove Drawables from the DrawableComposite
      *
-     * @param drawable
+     * @param drawable The Drawable to be removed
      */
     public void removeDrawable(Drawable drawable) {
         drawableList.remove(drawable);
@@ -39,7 +38,7 @@ public class DrawableComposite implements Drawable {
      * Draw all Drawables in the composite
      *
      * @param panel The JPanel to be drawn on
-     * @param  The list of Points that need to be drawn
+     * @param connectionProcessor The processor to processor connection params
      */
     public void draw(JPanel panel, ConnectionGeometryProcessor connectionProcessor) {
         for (Drawable drawable: drawableList) {

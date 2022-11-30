@@ -6,14 +6,26 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
+/**
+ * The panel in which UML can be designed
+ *
+ * @author yagaa
+ * @version 1.0.0
+ */
 public class DesignPanel extends JPanel implements DrawingPanel {
 
     DrawingPanelController controller;
     DrawableComposite drawableComposite;
 
+    /**
+     * Sets up panel position and components
+     *
+     * @param x The start position of the panel (x-axis)
+     * @param y The start position of the panel (y-axis)
+     * @param width The width of the panel
+     * @param height The height of the panel
+     */
     public DesignPanel(int x, int y, int width, int height) {
         controller = new DrawingPanelController(this);
         this.setBounds(x,y,width,height);
@@ -22,6 +34,13 @@ public class DesignPanel extends JPanel implements DrawingPanel {
         this.addMouseMotionListener(controller);
     }
 
+    /**
+     * Draw a rectangle and add content to it
+     *
+     * @param x The start position of the rectangle (x-axis)
+     * @param y The start position of the rectangle (y-axis)
+     * @param content The text to be added to the rectangle
+     */
     public void drawRectangle(int x, int y, String content) {
         Graphics g = this.getGraphics();
         g.setColor(ViewConstants.classColor);
@@ -41,8 +60,14 @@ public class DesignPanel extends JPanel implements DrawingPanel {
         g.drawString(content, x-(int)(content.length()*3.9), y+5);
     }
 
+    /**
+     * Draw a connection arrow
+     *
+     * @param from The UserClass from which the connection must start
+     * @param to The UserClass which the connection must reach
+     * @param type The ConnectionType of the connection
+     */
     public void drawConnection(UserClass from, UserClass to, ConnectionType type) {
-
         ConnectionGeometryProcessor connectionProcessor = new ConnectionGeometryProcessor(from, to);
         switch (type) {
             case ASSOCIATION -> {
@@ -64,6 +89,9 @@ public class DesignPanel extends JPanel implements DrawingPanel {
         }
     }
 
+    /**
+     * Redraw all DrawnClasses
+     */
     @Override
     public void redraw() {
         super.paintComponent(this.getGraphics());
@@ -76,6 +104,9 @@ public class DesignPanel extends JPanel implements DrawingPanel {
         }
     }
 
+    /**
+     * Clears the panel
+     */
     public void clearAll() {
         repaint();
         this.setBorder(BorderFactory.createLineBorder(ViewConstants.accentColor, 2));

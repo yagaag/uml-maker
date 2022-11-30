@@ -2,7 +2,6 @@ package View;
 
 import Controller.ConnectionGeometryProcessor;
 import Model.Point;
-import Model.UserClass;
 
 import javax.swing.*;
 import java.awt.*;
