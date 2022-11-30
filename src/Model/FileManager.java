@@ -8,11 +8,10 @@ import java.util.Scanner;
 
 public abstract class FileManager {
 
-    static String path = "saved/";
+    private static String path = "";
 
     public static boolean validateFileExist(String file) {
         File myFile = new File(path+file);
-        System.out.println(file);
         if (myFile.exists()) {
             return true;
         }
@@ -24,10 +23,12 @@ public abstract class FileManager {
             FileWriter myWriter = new FileWriter(path+file);
             DrawnClasses drawnClasses = DrawnClasses.getInstance();
             for (UserClass userClass: drawnClasses.getClasses()) {
-                myWriter.write(userClass.getTitle() + " " + userClass.xCoord() + " " + userClass.yCoord() + '\n');
-                myWriter.write("Connections:" + '\n');
+                myWriter.write("n " + userClass.getTitle() + " " + userClass.xCoord() + " " + userClass.yCoord() + '\n');
+            }
+            for (int i=0; i<drawnClasses.getLength(); i++) {
+                UserClass userClass = drawnClasses.getClassByID(i);
                 for (Connection connection: userClass.getConnections()) {
-                    myWriter.write(connection.getType().name + " " + connection.getToID() + '\n');
+                    myWriter.write("c " + connection.getType().name + " " + i + " " + connection.getToID() + '\n');
                 }
             }
             myWriter.close();
@@ -45,8 +46,17 @@ public abstract class FileManager {
             while (myReader.hasNextLine()) {
                 String d = myReader.nextLine();
                 String[] a = d.split(" ");
-                System.out.println(a[0]);
-//                drawnClasses.addUserClass((int) a[0], int(a[2]), a[0]);
+                if (a[0].charAt(0) == 'n') {
+                    drawnClasses.addUserClass(Integer.parseInt(a[2]), Integer.parseInt(a[3]), a[1]);
+                } else if (a[0].charAt(0) == 'c') {
+                    if (a[1] == "Association") {
+                        drawnClasses.addConnection(Integer.parseInt(a[2]), Integer.parseInt(a[3]), ConnectionType.ASSOCIATION);
+                    } else if (a[1] == "Inheritance") {
+                        drawnClasses.addConnection(Integer.parseInt(a[2]), Integer.parseInt(a[3]), ConnectionType.INHERITANCE);
+                    } else {
+                        drawnClasses.addConnection(Integer.parseInt(a[2]), Integer.parseInt(a[3]), ConnectionType.COMPOSITION);
+                    }
+                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -1,7 +1,6 @@
 package View;
 
 import Controller.SaveEventProcessor;
-import Model.FileManager;
 import Model.*;
 
 import javax.swing.*;
@@ -25,6 +24,7 @@ public class App extends JFrame implements ActionListener {
     CodePanel codePanel;
     DesignPanel designPanel;
     StatusBar statusBar;
+    SaveEventProcessor saveProcessor = new SaveEventProcessor();
 
     public App() {
 
@@ -95,12 +95,12 @@ public class App extends JFrame implements ActionListener {
             DrawnClasses.getInstance().reset();
         }
         else if (e.getSource() == save) {
-            SaveEventProcessor sp = new SaveEventProcessor();
-            sp.save();
+            saveProcessor.save();
         }
         else {
-            SaveEventProcessor sp = new SaveEventProcessor();
-            sp.load();
+            if (saveProcessor.load()) {
+                designPanel.redraw();
+            }
         }
     }
 }
