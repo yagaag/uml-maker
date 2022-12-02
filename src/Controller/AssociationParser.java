@@ -13,7 +13,6 @@ public class AssociationParser implements Parser {
 
     @Override
     public void parse(UserClass userClass, CodeViewPanel panel) {
-
         boolean method_added = false;
         ArrayList<Connection> connections = userClass.getConnections();
         for (int i=0; i<connections.size(); i++) {

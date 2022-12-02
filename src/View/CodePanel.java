@@ -17,8 +17,8 @@ import java.util.Observer;
  */
 public class CodePanel extends JPanel implements CodeViewPanel, Observer {
 
-    JTextPane code;
-    CodeProcessor codeProcessor;
+    JTextPane code = new JTextPane();
+    CodeProcessor codeProcessor = new CodeProcessor();
 
     /**
      * Sets up panel position and components
@@ -29,11 +29,9 @@ public class CodePanel extends JPanel implements CodeViewPanel, Observer {
      * @param height The height of the panel
      */
     public CodePanel(int x, int y, int width, int height) {
-        codeProcessor = new CodeProcessor();
         this.setBounds(x,y,width,height);
         this.setBorder(BorderFactory.createLineBorder(ViewConstants.accentColor, 2));
         this.setBackground(Color.white);
-        code = new JTextPane();
         code.setEditable(false);
         code.setBounds(10,5,width-20,height-20);
         this.setLayout(null);

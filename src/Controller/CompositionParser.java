@@ -13,7 +13,6 @@ public class CompositionParser extends ChainableParser {
 
     @Override
     public void parse(UserClass userClass, CodeViewPanel panel) {
-
         ArrayList<Connection> connections = userClass.getConnections();
         for (int i=0; i<connections.size(); i++) {
             if (connections.get(i).getType() == ConnectionType.COMPOSITION) {

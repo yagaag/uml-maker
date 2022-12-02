@@ -21,10 +21,6 @@ public class DrawingPanelController implements MouseListener, MouseMotionListene
         panel = p;
     }
 
-//    public void setPanelMode(PanelMode m) {
-//        lastClickMode = m;
-//    }
-
     @Override
     public void mouseClicked(MouseEvent e) {
         drag = false;

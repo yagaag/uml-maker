@@ -1,8 +1,6 @@
 package View;
 
 import Controller.ConnectionGeometryProcessor;
-import Model.DrawnClasses;
-import Model.UserClass;
 
 import javax.swing.*;
 import java.awt.*;

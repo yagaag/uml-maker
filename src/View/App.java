@@ -30,7 +30,6 @@ public class App extends JFrame implements ActionListener {
     CodePanel codePanel;
     DesignPanel designPanel;
     StatusBar statusBar;
-    SaveEventProcessor saveProcessor = new SaveEventProcessor();
 
     /**
      * Sets up UI components and displays the JFrame
@@ -109,10 +108,10 @@ public class App extends JFrame implements ActionListener {
             DrawnClasses.getInstance().reset();
         }
         else if (e.getSource() == save) {
-            saveProcessor.save();
+            SaveEventProcessor.save();
         }
         else {
-            if (saveProcessor.load()) {
+            if (SaveEventProcessor.load()) {
                 designPanel.redraw();
             }
         }

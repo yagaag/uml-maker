@@ -8,7 +8,6 @@ public abstract class ChainableParser implements Parser {
     public void setNextParser(Parser parser) {
         this.nextParser = parser;
     }
-
     public void parse(UserClass userClass, CodeViewPanel panel) {
         if (nextParser == null) {
             nextParser = new AssociationParser();

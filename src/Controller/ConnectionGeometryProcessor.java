@@ -15,10 +15,6 @@ public class ConnectionGeometryProcessor {
 
     Point fromPoint;
     Point toPoint;
-    int fromX;
-    int fromY;
-    int toX;
-    int toY;
     
     public ConnectionGeometryProcessor(UserClass from, UserClass to) {
         this.fromClass = from;

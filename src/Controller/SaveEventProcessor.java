@@ -1,15 +1,13 @@
 package Controller;
 
-import Model.DrawnClasses;
 import Model.FileManager;
 import Model.GlobalStatus;
 
 import javax.swing.*;
-import java.io.File;
 
-public class SaveEventProcessor {
+public abstract class SaveEventProcessor {
 
-    public void save() {
+    public static void save() {
         String filename = JOptionPane.showInputDialog("Enter a filename:");
         if (filename == null) {
             return;
@@ -23,7 +21,7 @@ public class SaveEventProcessor {
         GlobalStatus.getInstance().setDrawStatus("File saved successfully");
     }
 
-    public boolean load() {
+    public static boolean load() {
         String filename = JOptionPane.showInputDialog("Enter the filename to load:");
         if (filename == null) {
             return false;
