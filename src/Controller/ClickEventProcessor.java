@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.DrawnClasses;
-import Model.PanelMode;
 import Model.UserClass;
 import View.ViewConstants;
 
