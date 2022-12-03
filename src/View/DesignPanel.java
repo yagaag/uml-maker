@@ -6,6 +6,8 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * The panel in which UML can be designed
@@ -13,9 +15,8 @@ import java.awt.*;
  * @author yagaa
  * @version 1.0.0
  */
-public class DesignPanel extends JPanel implements DrawingPanel {
+public class DesignPanel extends JPanel implements Observer {
 
-    DrawingPanelController controller;
     DrawableComposite drawableComposite;
 
     /**
@@ -27,7 +28,7 @@ public class DesignPanel extends JPanel implements DrawingPanel {
      * @param height The height of the panel
      */
     public DesignPanel(int x, int y, int width, int height) {
-        controller = new DrawingPanelController(this);
+        DrawingPanelController controller = new DrawingPanelController();
         this.setBounds(x,y,width,height);
         this.setBackground(ViewConstants.accentColor);
         this.addMouseListener(controller);
@@ -70,17 +71,17 @@ public class DesignPanel extends JPanel implements DrawingPanel {
     public void drawConnection(UserClass from, UserClass to, ConnectionType type) {
         ConnectionGeometryProcessor connectionProcessor = new ConnectionGeometryProcessor(from, to);
         switch (type) {
-            case ASSOCIATION -> {
+            case Association -> {
                 drawableComposite = new DrawArrow();
                 drawableComposite.addDrawable(new DrawLine());
                 drawableComposite.draw(this, connectionProcessor);
             }
-            case INHERITANCE -> {
+            case Inheritance -> {
                 drawableComposite = new DrawTriangle();
                 drawableComposite.addDrawable(new DrawLine());
                 drawableComposite.draw(this, connectionProcessor);
             }
-            case COMPOSITION -> {
+            case Composition -> {
                 drawableComposite = new DrawDiamond();
                 drawableComposite.addDrawable(new DrawArrow());
                 drawableComposite.addDrawable(new DrawLine());
@@ -92,14 +93,13 @@ public class DesignPanel extends JPanel implements DrawingPanel {
     /**
      * Redraw all DrawnClasses
      */
-    @Override
     public void redraw() {
         super.paintComponent(this.getGraphics());
         DrawnClasses drawnClasses = DrawnClasses.getInstance();
         for (UserClass userClass: drawnClasses.getClasses()) {
             drawRectangle(userClass.xCoord(), userClass.yCoord(), userClass.getTitle());
             for (Connection connection: userClass.getConnections()) {
-                drawConnection(userClass, connection.getToClass(), connection.getType());
+                drawConnection(userClass, drawnClasses.getClasses().get(connection.getToID()), connection.getType());
             }
         }
     }
@@ -110,5 +110,9 @@ public class DesignPanel extends JPanel implements DrawingPanel {
     public void clearAll() {
         repaint();
         this.setBorder(BorderFactory.createLineBorder(ViewConstants.accentColor, 2));
+    }
+    @Override
+    public void update(Observable o, Object arg) {
+        this.redraw();
     }
 }

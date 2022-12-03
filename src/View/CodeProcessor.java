@@ -1,8 +1,7 @@
-package Controller;
+package View;
 
 import Model.DrawnClasses;
 import Model.UserClass;
-import View.CodeViewPanel;
 
 import java.awt.*;
 
@@ -16,10 +15,10 @@ public class CodeProcessor {
 
     private void setupParseChain() {
         headParser = new InheritanceParser();
-        CompositionParser secondParser = new CompositionParser();
-        AssociationParser tailParser = new AssociationParser();
-        secondParser.setNextParser(tailParser);
+        ChainableParser secondParser = new CompositionParser();
         headParser.setNextParser(secondParser);
+        Parser tailParser = new AssociationParser();
+        secondParser.setNextParser(tailParser);
     }
 
     public void parseUML(CodeViewPanel panel) {

@@ -1,8 +1,5 @@
 package View;
 
-import Controller.CodeProcessor;
-import Model.ViewConstants;
-
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;

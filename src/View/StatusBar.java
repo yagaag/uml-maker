@@ -1,8 +1,6 @@
 package View;
 
 import Model.GlobalStatus;
-import Model.ViewConstants;
-import org.w3c.dom.Text;
 
 import javax.swing.*;
 import java.awt.*;

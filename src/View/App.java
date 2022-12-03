@@ -1,12 +1,10 @@
 package View;
 
-import Controller.SaveEventProcessor;
+import Controller.AppController;
 import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Primary JFrame with all panels
@@ -14,42 +12,39 @@ import java.awt.event.ActionListener;
  * @author yagaa
  * @version 1.0.0
  */
-public class App extends JFrame implements ActionListener {
+public class App extends JFrame {
 
-    JMenuBar menuBar;
-    JMenuItem save = new JMenuItem("Save");
-    JMenuItem load = new JMenuItem("Load");
-    JMenuItem clear = new JMenuItem("Clear");
-    JMenuItem association = new JMenuItem(ConnectionType.ASSOCIATION.name);
-    JMenuItem inheritance = new JMenuItem(ConnectionType.INHERITANCE.name);
-    JMenuItem aggregation = new JMenuItem(ConnectionType.COMPOSITION.name);
-    JMenuItem member_1 = new JMenuItem(TeamList.YAGAA.name);
-    JMenuItem member_2 = new JMenuItem(TeamList.CHINMAY.name);
-    JMenuItem member_3 = new JMenuItem(TeamList.SNIGDHA.name);
-    JMenuItem member_4 = new JMenuItem(TeamList.MOHAN.name);
-    CodePanel codePanel;
-    DesignPanel designPanel;
-    StatusBar statusBar;
+
 
     /**
      * Sets up UI components and displays the JFrame
      */
     public App() {
-
+        JMenuBar menuBar;
+        JMenuItem save = new JMenuItem("Save");
+        JMenuItem load = new JMenuItem("Load");
+        JMenuItem clear = new JMenuItem("Clear");
+        JMenuItem association = new JMenuItem(ConnectionType.Association.name);
+        JMenuItem inheritance = new JMenuItem(ConnectionType.Inheritance.name);
+        JMenuItem aggregation = new JMenuItem(ConnectionType.Composition.name);
+        JMenuItem member_1 = new JMenuItem(TeamList.YAGAA.name);
+        JMenuItem member_2 = new JMenuItem(TeamList.CHINMAY.name);
+        JMenuItem member_3 = new JMenuItem(TeamList.SNIGDHA.name);
+        JMenuItem member_4 = new JMenuItem(TeamList.MOHAN.name);
+        CodePanel codePanel;
+        DesignPanel designPanel;
+        StatusBar statusBar = new StatusBar(-2, 745, ViewConstants.panelWidth+4, 37);
         menuBar = new JMenuBar();
         JMenu file = new JMenu("File");
         JMenu help = new JMenu("Help");
         JMenu connectionType = new JMenu("Connection");
-        save.addActionListener(this);
-        load.addActionListener(this);
-        clear.addActionListener(this);
-        association.addActionListener(this);
-        inheritance.addActionListener(this);
-        aggregation.addActionListener(this);
-        member_1.addActionListener(this);
-        member_2.addActionListener(this);
-        member_3.addActionListener(this);
-        member_4.addActionListener(this);
+        AppController appController = new AppController();
+        save.addActionListener(appController);
+        load.addActionListener(appController);
+        clear.addActionListener(appController);
+        association.addActionListener(appController);
+        inheritance.addActionListener(appController);
+        aggregation.addActionListener(appController);
         file.add(save);
         file.add(load);
         file.add(clear);
@@ -71,9 +66,9 @@ public class App extends JFrame implements ActionListener {
         codePanel.setBorder(BorderFactory.createLineBorder(ViewConstants.accentColor, 2));
         codePanel.setBackground(Color.white);
         designPanel = new DesignPanel(320, 45, 670, 690);
-        statusBar = new StatusBar(-2, 745, ViewConstants.panelWidth+4, 37);
         GlobalStatus.getInstance().addObserver(statusBar);
         DrawnClasses.getInstance().addObserver(codePanel);
+        DrawnClasses.getInstance().addObserver(designPanel);
 
         this.setPreferredSize(new Dimension(ViewConstants.panelWidth,ViewConstants.panelHeight));
         this.setLayout(null);
@@ -87,33 +82,8 @@ public class App extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    /**
-     * Sets actions for different menu items
-     *
-     * @param e ActionEvent passed by key press
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == association) {
-            GlobalStatus.getInstance().setConnectionType(ConnectionType.ASSOCIATION);
-        }
-        else if (e.getSource() == inheritance) {
-            GlobalStatus.getInstance().setConnectionType(ConnectionType.INHERITANCE);
-        }
-        else if (e.getSource() == aggregation) {
-            GlobalStatus.getInstance().setConnectionType(ConnectionType.COMPOSITION);
-        }
-        else if (e.getSource() == clear) {
-            designPanel.clearAll();
-            DrawnClasses.getInstance().reset();
-        }
-        else if (e.getSource() == save) {
-            SaveEventProcessor.save();
-        }
-        else {
-            if (SaveEventProcessor.load()) {
-                designPanel.redraw();
-            }
-        }
+    public static void main(String[] args) {
+        new App();
     }
+
 }
