@@ -1,4 +1,4 @@
-package Model;
+package View;
 
 import java.awt.*;
 

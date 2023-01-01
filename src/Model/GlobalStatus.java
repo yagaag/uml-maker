@@ -3,8 +3,8 @@ package Model;
 import java.util.Observable;
 
 public class GlobalStatus extends Observable {
-    static GlobalStatus instance;
-    ConnectionType connectionType = ConnectionType.ASSOCIATION;
+    private static GlobalStatus instance;
+    ConnectionType connectionType = ConnectionType.Association;
     String drawStatus = "No class selected";
     private GlobalStatus() {}
     public static GlobalStatus getInstance() {

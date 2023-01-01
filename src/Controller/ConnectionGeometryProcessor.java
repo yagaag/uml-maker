@@ -2,7 +2,7 @@ package Controller;
 
 import Model.Point;
 import Model.UserClass;
-import Model.ViewConstants;
+import View.ViewConstants;
 
 import java.util.ArrayList;
 

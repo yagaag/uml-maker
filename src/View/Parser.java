@@ -1,4 +1,4 @@
-package Controller;
+package View;
 
 import Model.UserClass;
 import View.CodeViewPanel;

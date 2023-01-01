@@ -1,7 +1,7 @@
 package Model;
 
 public enum ConnectionType {
-    ASSOCIATION("Association"), INHERITANCE("Inheritance"), COMPOSITION("Composition");
+    Association("Association"), Inheritance("Inheritance"), Composition("Composition");
     public String name;
     ConnectionType(String s) {
         this.name = s;

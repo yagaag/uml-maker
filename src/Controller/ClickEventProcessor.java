@@ -1,14 +1,24 @@
 package Controller;
 
 import Model.DrawnClasses;
-import Model.PanelMode;
 import Model.UserClass;
-import Model.ViewConstants;
+import View.ViewConstants;
 
 import javax.swing.*;
 
 public class ClickEventProcessor {
 
+    private static ClickEventProcessor instance;
+    protected ClickEventProcessor() {
+
+    }
+
+    public static ClickEventProcessor getInstance() {
+        if(instance == null) {
+            instance = new ClickEventProcessor();
+        }
+        return instance;
+    }
     int lastClickPanelID;
     String lastClassName;
 
@@ -35,17 +45,13 @@ public class ClickEventProcessor {
         return mode;
     }
 
-    public boolean newUserClass(int x, int y) {
+    public void newUserClass(int x, int y) {
         lastClassName = JOptionPane.showInputDialog("Enter the name of the class:");
         DrawnClasses drawnClasses = DrawnClasses.getInstance();
-        if (lastClassName == null) {
-            return false;
-        }
-        if (lastClassName.length() == 0) {
+        if (lastClassName == null || lastClassName.length() == 0) {
             lastClassName = "Class" + (drawnClasses.getLength()+1);
         }
         drawnClasses.addUserClass(x, y, lastClassName);
-        return true;
     }
 
     public int getLastClickPanelID() {
