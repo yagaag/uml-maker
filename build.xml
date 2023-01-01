@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="UMLMaker" basedir=".">
+
+    <property environment="env" />
+
+    <taskdef name="bundleapp"
+             classname="com.oracle.appbundler.AppBundlerTask"
+             classpath="lib/appbundler-1.1.0.jar" />
+
+    <property name="bundle.icon" value="icon.icns"/>
+    <target name="bundle-UMLMaker">
+        <bundleapp outputdirectory="release/app"
+                   name="UMLMaker"
+                   displayname="UML Maker"
+                   identifier="UMLMaker"
+                   mainclassname="View.App"
+                   icon="assets/icon.icns">
+            <runtime dir="${env.JAVA_HOME}" />
+            <classpath file="out/artifacts/UMLMaker_jar/UMLMaker.jar" />
+            <option value="-Xdock:icon=Contents/Resources/${bundle.icon}"/>
+            <option value="-Xmx1024M"/>
+        </bundleapp>
+    </target>
+
+</project>
