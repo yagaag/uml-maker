@@ -1,2 +1,4 @@
 saved/
 *.txt
+out/
+*.DS_Store
