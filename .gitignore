@@ -2,3 +2,6 @@ saved/
 *.txt
 out/
 *.DS_Store
+.idea/
+node_modules/
+release/
