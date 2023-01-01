@@ -18,8 +18,8 @@ If macOS does not permit opening the app<sup>[[1]](#1)</sup>, follow steps 2-6 i
 2. Compile the source and build the jar
 3. Change the directory of the jar in the build.xml file
 4. Make sure to set the directory of your java installation as JAVA_HOME in your environment
-5. Run build_app.sh to build the app as well as installer
+5. Run the script build_app.sh to build the app as well as installer
 6. You can find the installer in release/app/dmg. Use the installer to install your own custom UML Design Tool
 
-
-<a id="1">[1]</a> We're sorry for the inconvenience as we're broke college students and couldn't afford an Apple Developer account to sign the app. 
+#### Note
+<a id="1">[1]</a> We're sorry for the inconvenience. As broke college students, we couldn't afford an Apple Developer account to sign the app. 

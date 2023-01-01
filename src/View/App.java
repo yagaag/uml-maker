@@ -48,8 +48,8 @@ public class App extends JFrame {
         connectionType.add(inheritance);
         connectionType.add(aggregation);
         menuBar.add(file);
-        menuBar.add(help);
         menuBar.add(connectionType);
+        menuBar.add(help);
         menuBar.setBounds(-2,-2,ViewConstants.panelWidth+4,35);
         menuBar.setBorder(BorderFactory.createLineBorder(ViewConstants.accentColor, 2));
         menuBar.setBackground(Color.white);
