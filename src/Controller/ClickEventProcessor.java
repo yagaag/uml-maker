@@ -9,9 +9,7 @@ import javax.swing.*;
 public class ClickEventProcessor {
 
     private static ClickEventProcessor instance;
-    protected ClickEventProcessor() {
-
-    }
+    protected ClickEventProcessor() {}
 
     public static ClickEventProcessor getInstance() {
         if(instance == null) {

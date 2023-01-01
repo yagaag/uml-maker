@@ -14,8 +14,6 @@ import java.awt.*;
  */
 public class App extends JFrame {
 
-
-
     /**
      * Sets up UI components and displays the JFrame
      */
@@ -27,10 +25,7 @@ public class App extends JFrame {
         JMenuItem association = new JMenuItem(ConnectionType.Association.name);
         JMenuItem inheritance = new JMenuItem(ConnectionType.Inheritance.name);
         JMenuItem aggregation = new JMenuItem(ConnectionType.Composition.name);
-        JMenuItem member_1 = new JMenuItem(TeamList.YAGAA.name);
-        JMenuItem member_2 = new JMenuItem(TeamList.CHINMAY.name);
-        JMenuItem member_3 = new JMenuItem(TeamList.SNIGDHA.name);
-        JMenuItem member_4 = new JMenuItem(TeamList.MOHAN.name);
+        JMenuItem signin = new JMenuItem("Sign in");
         CodePanel codePanel;
         DesignPanel designPanel;
         StatusBar statusBar = new StatusBar(-2, 745, ViewConstants.panelWidth+4, 37);
@@ -48,10 +43,7 @@ public class App extends JFrame {
         file.add(save);
         file.add(load);
         file.add(clear);
-        help.add(member_1);
-        help.add(member_2);
-        help.add(member_3);
-        help.add(member_4);
+        help.add(signin);
         connectionType.add(association);
         connectionType.add(inheritance);
         connectionType.add(aggregation);
