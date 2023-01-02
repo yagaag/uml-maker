@@ -6,4 +6,4 @@ mkdir release/win
 
 cp -r $JAVA_HOME release/win/jre
 java -jar lib/launch4j/launch4j.jar config.xml
-zip -vr release/win.zip release/win/
+zip -vr release/umlmaker_windows.zip release/win/

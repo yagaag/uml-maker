@@ -3,7 +3,7 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
   <jar>out/artifacts/UMLMaker_jar/UMLMaker.jar</jar>
-  <outfile>release/win/uml.exe</outfile>
+  <outfile>release/win/UMLMaker.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
