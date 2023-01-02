@@ -5,3 +5,4 @@ out/
 .idea/
 node_modules/
 release/
+lib/launch4j/

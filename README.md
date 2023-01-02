@@ -5,7 +5,8 @@ A customizable macOS UML Design tool with Java source code generation
 ### Usage
 
 Download the installer from [this link](https://drive.google.com/file/d/1rYkz-mwUHOYxSWxlbyORrKCc59FW5aA1/view?usp=sharing) and make and share simple UML diagrams.
-If macOS does not permit opening the app<sup>[[1]](#1)</sup>, follow steps 2-6 in the Custom Build section, and you're all set :)
+If macOS does not permit opening the app<sup>[[1]](#1)</sup>, go to System Preferences > Security and Privacy > General pane > Click on the lock on the left bottom to make changes and allow UMLMaker.
+Alternatively, you can follow steps 2-6 in the Custom Build section to build the app and installer on your own system, and you're all set :)
 
 ### Demo
 
