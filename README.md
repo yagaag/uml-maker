@@ -6,7 +6,7 @@ A customizable cross-platform UML Design tool with Java source code generation
 
 #### macOS
 Download the installer from [this link](https://drive.google.com/file/d/1rYkz-mwUHOYxSWxlbyORrKCc59FW5aA1/view?usp=sharing), install and run app to make and share simple UML diagrams.
-If macOS does not permit opening the app<sup>[[1]](#1)</sup>, go to System Preferences > Security and Privacy > General pane > Click on the lock on the left bottom to make changes and allow UMLMaker.
+If macOS does not permit opening the app, go to System Preferences > Security and Privacy > General pane > Click on the lock on the left bottom to make changes and allow UMLMaker.
 
 Alternatively, you can follow steps 2-6 in the Custom Build section to build the app and installer on your own system, and you're all set :)
 
@@ -34,7 +34,3 @@ Alternatively, you can follow steps 2-6 in the Custom Build section to build the
 #### Windows
 5. Download launch4j from [this link](https://sourceforge.net/projects/launch4j/files/launch4j-3/3.14/) and extract it to the lib folder. Run the script build_windows.sh to build the exe and package as zip
 6. You can find the EXE in release/windows. Run it to use your own custom UML design tool
-
-
-#### Note
-<a id="1">[1]</a> We're sorry for the inconvenience. As broke college students, we couldn't afford an Apple Developer account to sign the app. 
